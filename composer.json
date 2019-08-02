@@ -1,0 +1,22 @@
+{
+    "name": "putzflorian/pimcore-services",
+    "type": "library",
+    "description": "Useful Services for pimcore",
+    "homepage": "https://github.com/putzflorian/pimcore-services",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Florian Putz",
+            "email": "putzflorian@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "pimcore/pimcore": ">=6.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Putzflorian": "src"
+        }
+    }
+}
