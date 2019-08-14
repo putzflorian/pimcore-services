@@ -1,6 +1,11 @@
 # Pimcore Services
 Useful Services for pimcore
 
+***Installation via Composer***
+```
+composer require putzflorian/pimcore-services
+```
+
 ***Add to your parameters.yml***
 ```yaml
 parameters:
