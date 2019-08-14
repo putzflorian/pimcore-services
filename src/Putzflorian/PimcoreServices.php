@@ -54,9 +54,14 @@ class PimcoreServices {
     
     public function safeCrypt($string, $action = 'e'): string {
 
-        // you may change these values to your own
         $secret_key = '**secret_key**';
         $secret_iv = '**secret_iv**';
+
+        if(\Pimcore::getContainer()->hasParameter('putzflorian_pimcoreservices')){
+            $p = \Pimcore::getContainer()->getParameter('putzflorian_pimcoreservices');
+            $secret_key = $p['safe_crypt']['secret_key'];
+            $secret_iv = $p['safe_crypt']['secret_iv'];
+        }
 
         $output = false;
         $encrypt_method = "AES-256-CBC";
@@ -112,7 +117,7 @@ class PimcoreServices {
      * @param  string $range IP/CIDR netmask eg. 127.0.0.0/24, also 127.0.0.1 is accepted and /32 assumed
      * @return boolean true if the ip is in this range / false if not.
      */
-    private function ip_in_range( $ip, $range ) {
+    private function ipInRange( $ip, $range ) {
     	if ( strpos( $range, '/' ) == false ) {
     		$range .= '/32';
     	}
@@ -131,7 +136,7 @@ class PimcoreServices {
      *
      * @return bool|float|int|mixed
      */
-    public function gps_konverter($pos) {
+    public function gpsKonverter($pos) {
         preg_match ('#(\d+)\s*°\s*(\d+)\s*\'\s*(\d+)(?:[,.](\d+))?\s*"#U' , $pos , $items);
 
         if (empty ($items)) return false;
