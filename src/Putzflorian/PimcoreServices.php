@@ -4,7 +4,7 @@ namespace Putzflorian;
 
 class PimcoreServices {
 
-    private function checkAssetFileName($parent, $filename, $duplicates = true){
+    public function checkAssetFileName($parent, $filename, $duplicates = true){
         if($duplicates){
             return $this->checkAssetFile($parent, $filename);
         } else {
@@ -36,7 +36,7 @@ class PimcoreServices {
     }
 
 
-    private function getParentAssetObject($parent){
+    public function getParentAssetObject($parent){
 
         $parentObject = null;
 
@@ -79,7 +79,7 @@ class PimcoreServices {
 
     }
     
-        public function getYoutubeId($url, $netcookieUrl = false){
+    public function getYoutubeId($url, $netcookieUrl = false){
 
         // Here is a sample of the URLs this regex matches: (there can be more content after the given URL that will be ignored)
         // http://youtu.be/dQw4w9WgXcQ
@@ -117,7 +117,7 @@ class PimcoreServices {
      * @param  string $range IP/CIDR netmask eg. 127.0.0.0/24, also 127.0.0.1 is accepted and /32 assumed
      * @return boolean true if the ip is in this range / false if not.
      */
-    private function ipInRange( $ip, $range ) {
+    public function ipInRange( $ip, $range ) {
     	if ( strpos( $range, '/' ) == false ) {
     		$range .= '/32';
     	}
