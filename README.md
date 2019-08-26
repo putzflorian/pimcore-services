@@ -3,7 +3,7 @@ Useful Services for pimcore
 
 ***Installation via Composer***
 ```
-composer require putzflorian/pimcore-services
+COMPOSER_MEMORY_LIMIT=-1 composer require putzflorian/pimcore-services
 ```
 
 ***Add to your parameters.yml***
