@@ -2,7 +2,24 @@
 
 namespace Putzflorian;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 class PimcoreServices {
+
+    /**
+     * @var ParameterBagInterface
+     */
+    private $params;
+
+    /**
+     * PimcoreServices constructor.
+     *
+     * @param ParameterBagInterface $params
+     */
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
 
     public function checkAssetFileName($parent, $filename, $duplicates = true){
         if($duplicates){
@@ -50,15 +67,15 @@ class PimcoreServices {
 
         return $parentObject;
     }
-    
-    
+
+
     public function safeCrypt($string, $action = 'e'): string {
 
         $secret_key = '**secret_key**';
         $secret_iv = '**secret_iv**';
 
-        if(\Pimcore::getContainer()->hasParameter('putzflorian_pimcoreservices')){
-            $p = \Pimcore::getContainer()->getParameter('putzflorian_pimcoreservices');
+        if($this->params->has('putzflorian_pimcoreservices')){
+            $p = $this->params->get('putzflorian_pimcoreservices');
             $secret_key = $p['safe_crypt']['secret_key'];
             $secret_iv = $p['safe_crypt']['secret_iv'];
         }
@@ -78,7 +95,7 @@ class PimcoreServices {
         return $output;
 
     }
-    
+
     public function getYoutubeId($url, $netcookieUrl = false){
 
         // Here is a sample of the URLs this regex matches: (there can be more content after the given URL that will be ignored)
@@ -110,7 +127,7 @@ class PimcoreServices {
         }
 
     }
-    
+
         /**
      * Check if a given ip is in a network
      * @param  string $ip    IP to check in IPV4 format eg. 127.0.0.1
@@ -129,7 +146,7 @@ class PimcoreServices {
     	$netmask_decimal = ~ $wildcard_decimal;
     	return ( ( $ip_decimal & $netmask_decimal ) == ( $range_decimal & $netmask_decimal ) );
     }
-    
+
     /**
      * Convert GPS Koordinates 47° 48' 34.164" N --> 47.809491
      * @param $pos
